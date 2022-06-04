@@ -1,0 +1,12 @@
+site_name: Teacher Helper Documentation
+theme:
+  name: material
+
+docs_dir: src
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
