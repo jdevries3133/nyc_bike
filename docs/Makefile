@@ -34,6 +34,8 @@ develop: venv
 .PHONY: deploy
 deploy:
 	docker buildx build --platform linux/amd64 --push -t $(CONTAINER) .
+ifdef CI
 	terraform init -input=false
+endif
 	terraform apply -auto-approve
 

@@ -5,11 +5,12 @@ on: push
 
 jobs:
 
-  docs-site:
-    name: Deploy documentation website
+  deploy:
+    name: Deploy application
     runs-on: ubuntu-latest
     environment: Kubernetes
     steps:
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -19,9 +20,15 @@ jobs:
         with:
           username: jdevries3133
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Setup kube config
         run: mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
-      - name: Deploy documentation site
+
+        # `make deploy` recursively calls into sub-project makefiles in order
+        # to deploy each of them. This might become brittle with scale since
+        # it's a monolithic command, and can be broken into separate CI/CD
+        # steps or jobs if it becomes an issue
+      - name: Deploy application
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

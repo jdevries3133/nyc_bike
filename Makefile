@@ -19,4 +19,4 @@ develop: setup
 .PHONY: deploy
 deploy:
 	make --directory=./docs deploy
-
+	make --directory=./web_front deploy
