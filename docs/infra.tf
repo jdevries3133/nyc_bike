@@ -29,5 +29,9 @@ module "deployment" {
 
   app_name  = "recipe-docs"
   container = "jdevries3133/recipe_docs:${data.external.git_describe.result.output}"
+
+  # something cursed is happening in kubernetes with thomas's domains, I don't
+  # understand what the issue is but I keep getting infinite redirects when I
+  # deploy to thomasdevri.es or thomasdevries.dev
   domain    = "recipedocs.jackdevries.com"
 }
