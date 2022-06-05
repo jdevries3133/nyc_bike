@@ -13,10 +13,16 @@ setup:
 
 .PHONY: develop
 develop: setup
-	make --directory=./web_front develop
+	concurrently -n web_front,backend \
+		"make --directory=./web_front develop"
+
 
 
 .PHONY: deploy
 deploy:
 	make --directory=./docs deploy
 	make --directory=./web_front deploy
+
+.PHONY: test
+test:
+	make --directory=./web_front test

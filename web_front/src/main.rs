@@ -1,3 +1,5 @@
+use lib::constants;
+use wasm_logger;
 use yew::prelude::*;
 
 enum Msg {
@@ -45,11 +47,13 @@ impl Component for Model {
                 >{ "+1" }</button>
                 <p class="text-xl serif">{ "Current Count: " }{ self.value }</p>
                 <FunctionComponent />
+                <p>{ "base url: " }{ constants::BACKEND_BASE_URL }</p>
             </div>
         }
     }
 }
 
 fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
     yew::start_app::<Model>();
 }

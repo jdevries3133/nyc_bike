@@ -35,9 +35,12 @@ endif
 
 .PHONY: develop
 develop: setup
-	# the top-level makefile checks for the installation of `concurrently` and
-	# errors nicely if it's missing, so we will just use it here
-	concurrently \
+	@# TODO: this rule is buggy because it seems like trunk is continuously
+	@# rebuilding during the entire time that tailwind is generating the CSS.
+	@# like, it it takes 100ms for tailwind to generate css and 2ms for trunk
+	@# to rebuild, trunk will rebuild over and over again for that entire
+	@# 100ms while the tailwind.css file is changing
+	concurrently -n css,trunk \
 		"tailwindcss $(TAILWIND_FLAGS) $(TAILWIND_DEV_FLAGS)" \
 		"$(TRUNK) serve"
 
@@ -63,3 +66,8 @@ ifdef CI
 endif
 	terraform apply -auto-approve
 
+
+.PHONY: test
+test:
+	IS_PRODUCTION=true cargo test
+	cargo test
