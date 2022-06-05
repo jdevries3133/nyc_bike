@@ -9,10 +9,14 @@ setup:
 		echo "fatal: must install concurrently with ``npm install --global concurrently``"; \
 		exit 1; \
 	fi
-
-	cd web_front && make setup
+	make --directory=./web_front setup
 
 .PHONY: develop
 develop: setup
-	concurrently \
-		"cd web_front && make develop"
+	make --directory=./web_front develop
+
+
+.PHONY: deploy
+deploy:
+	make --directory=./docs deploy
+
