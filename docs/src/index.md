@@ -1,5 +1,4 @@
-# Bike Map
+# Hello World
 
-This project aims to build a navigation app for bike riders that takes
-rider-driven data into account, as well as safety data and accident data
-relevant to bike riders. Kind of like a Waze for urban bike riding.
+This is the base documentation site. Make changes by modifying source files in
+`doc/src`. There are already some documentation pages about the tech stack.
