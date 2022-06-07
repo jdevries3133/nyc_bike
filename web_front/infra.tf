@@ -30,5 +30,5 @@ module "container-deployment" {
 
   app_name = "recipe-front"
   container = "jdevries3133/recipe_front:${data.external.git_describe.result.output}"
-  domain = "recipe.jackdevries.com"
+  domain = "bike.jackdevries.com"
 }

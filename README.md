@@ -1,2 +1,3 @@
-# recipeCompete
-A gamified recipe learning app
+# Bike Nav
+
+This one is really over my head so we'll see if it goes anywhere...

@@ -33,5 +33,5 @@ module "deployment" {
   # something cursed is happening in kubernetes with thomas's domains, I don't
   # understand what the issue is but I keep getting infinite redirects when I
   # deploy to thomasdevri.es or thomasdevries.dev
-  domain    = "recipedocs.jackdevries.com"
+  domain    = "bikedoc.jackdevries.com"
 }
