@@ -2,7 +2,7 @@ terraform {
 
   backend "s3" {
     bucket = "my-sites-terraform-remote-state"
-    key    = "recipe_front"
+    key    = "rust_template_web"
     region = "us-east-2"
   }
 
@@ -28,7 +28,7 @@ module "container-deployment" {
   source  = "jdevries3133/container-deployment/kubernetes"
   version = "0.3.0"
 
-  app_name = "recipe-front"
-  container = "jdevries3133/recipe_front:${data.external.git_describe.result.output}"
-  domain = "bike.jackdevries.com"
+  app_name = "rust-template-web"
+  container = "jdevries3133/rust_template_web:${data.external.git_describe.result.output}"
+  domain = "rust-template-web.jackdevries.com"
 }

@@ -2,7 +2,7 @@ SHELL:=bash
 
 # documentation site container
 DOCKER_ACCOUNT=jdevries3133
-CONTAINER_NAME=bike_docs
+CONTAINER_NAME=rust_template_docs
 TAG?=$(shell git describe --tags)
 CONTAINER=$(DOCKER_ACCOUNT)/$(CONTAINER_NAME):$(TAG)
 
