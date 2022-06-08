@@ -19,13 +19,7 @@ CONTAINER=$(DOCKER_ACCOUNT)/$(CONTAINER_NAME):$(TAG)
 
 
 .PHONY: setup
-setup:
-	@# check installation of npm package `tailwindcss`
-	@which tailwindcss > /dev/null; \
-	if [[ $$? -ne 0 ]]; then \
-		echo "fatal: must install tailwindcss with ``npm install --global tailwindcss``"; \
-		exit 1; \
-	fi
+setup-ci:
 ifdef CI
 	# download a trunk binary to the current working directory
 	wget -qO- https://github.com/thedodd/trunk/releases/download/v0.15.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
@@ -34,7 +28,7 @@ endif
 
 
 .PHONY: develop
-develop: setup
+develop: setup-ci
 	@# TODO: this rule is buggy because it seems like trunk is continuously
 	@# rebuilding during the entire time that tailwind is generating the CSS.
 	@# like, it it takes 100ms for tailwind to generate css and 2ms for trunk
@@ -52,15 +46,19 @@ clean:
 	rm -rf tailwind.css
 
 
-.PHONY: build
-build: setup clean
+.PHONY: pre-container-build
+pre-container-build: setup-ci clean
 	tailwindcss $(TAILWIND_FLAGS) $(TAILWIND_PROD_FLAGS)
 	$(TRUNK) build --release
+
+
+.PHONY: push-container
+push-container: pre-container-build
 	docker buildx build --platform linux/amd64 --push -t $(CONTAINER) .
 
 
 .PHONY: deploy
-deploy: build
+deploy: push-container
 ifdef CI
 	terraform init -input=false
 endif
