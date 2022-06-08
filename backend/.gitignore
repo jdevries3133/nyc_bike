@@ -1,0 +1,2 @@
+# executable copied from ../target/release by `make pre-docker-build`
+backend

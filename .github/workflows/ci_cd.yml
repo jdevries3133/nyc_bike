@@ -1,4 +1,4 @@
-name: Documentation website
+name: CI/CD Pipeline
 
 on: push
 
@@ -6,7 +6,7 @@ on: push
 jobs:
 
   deploy:
-    name: Deploy application
+    name: deploy application
     runs-on: ubuntu-latest
     environment: Kubernetes
     steps:
@@ -15,26 +15,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: run unit tests
-        run: make test
-
-      - name: global npm dependencies
-        run: npm install --global concurrently@7 tailwindcss@3
-
-      - name: Login to Docker Hub
+      - name: login to Docker Hub
         uses: docker/login-action@v1
         with:
           username: jdevries3133
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Setup kube config
+      - name: global npm dependencies
+        run: npm install --global concurrently@7 tailwindcss@3
+
+      - name: setup kube config
         run: mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
 
-        # `make deploy` recursively calls into sub-project makefiles in order
-        # to deploy each of them. This might become brittle with scale since
-        # it's a monolithic command, and can be broken into separate CI/CD
-        # steps or jobs if it becomes an issue
-      - name: Deploy application
+      - name: perform pre-deploy checks
+        run: make check
+
+      - name: deployment
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

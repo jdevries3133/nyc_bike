@@ -1,4 +1,4 @@
-SHELL:=bash
+SHELL:=/bin/bash
 
 # documentation site container
 DOCKER_ACCOUNT=jdevries3133
