@@ -23,12 +23,12 @@ initdb:
 
 
 .PHONY: develop
-develop: setup
+develop: initdb
 	find src | entr -r cargo run
 
 
 .PHONY: deploy
-deploy: setup
+deploy: initdb push
 ifdef CI
 	terraform init -input=false
 endif

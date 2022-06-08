@@ -5,7 +5,7 @@ SHELL:=/bin/bash
 develop:
 	# flutter CLI is the only one that uses STDIN normally (`r` to reload)
 	concurrently \
-		-n web_front,backend,mobile \
+		-n web_front,mobile,backend \
 		"make --directory=./web_front develop" \
 		"make --directory=./mobile    develop" \
 		"make --directory=./backend   develop"
