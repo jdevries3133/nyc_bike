@@ -18,10 +18,12 @@ Makefiles assume that you have installed these CLI tools.
 
 - rust & cargo
 - [trunk](https://trunkrs.dev/)
-- [entr](https://eradman.com/entrproject/) (CLI tool to re-run commands based on file changes)
+- [entr\*](https://eradman.com/entrproject/) (CLI tool to re-run commands based on file changes)
 - [concurrently](https://www.npmjs.com/package/concurrently/v/6.5.1) (run `npm install --global concurrently`)
 - [tailwindcss](https://www.npmjs.com/package/tailwindcss) (run `npm install --global tailwindcss`)
 - [flutter](https://docs.flutter.dev/get-started/install)
+
+_\*this is only required for development and need not be installed in CI/CD_
 
 ## Top-Level Makefile
 
