@@ -1,10 +1,14 @@
+FROM ubuntu:latest as user
+
+RUN useradd -u 10001 appuser
+
 FROM scratch
 
-WORKDIR /opt/rust_template_backend
+COPY --from=user /etc/passwd /etc/passwd
 
-# the backend executable is created and copied here by the `pre-docker-build`
-# make rule
-COPY backend .
-COPY ./Rocket.toml .
+WORKDIR /app
+COPY ./Rocket.toml ./backend ./
 
-CMD ["./target/release/backend"]
+USER appuser
+
+CMD ["./backend"]

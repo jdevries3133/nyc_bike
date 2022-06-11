@@ -28,7 +28,7 @@ develop: initdb
 
 
 .PHONY: deploy
-deploy: initdb push
+deploy: push
 ifdef CI
 	terraform init -input=false
 endif
@@ -37,13 +37,13 @@ endif
 
 .PHONY: pre-container-build
 pre-container-build:
-	cargo build --release
-	cp ../target/release/backend .
+	cargo build --release --target x86_64-unknown-linux-musl
+	cp ../target/x86_64-unknown-linux-musl/release/backend .
 
 
 .PHONY: push
 push: pre-container-build
-	docker buildx build --pull --platform linux/amd64 --push -t $(CONTAINER) .
+	docker buildx build --pull --platform linux/x86_64 --push -t $(CONTAINER) .
 
 
 .PHONY: check

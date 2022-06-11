@@ -44,5 +44,5 @@ module "basic-deployment" {
 
   app_name  = "rust-template-backend"
   container = "jdevries3133/rust_template_backend:${data.external.git_describe.result.output}"
-  domain    = "rust-template-frontend.jackdevries.com"
+  domain    = "rust-template-backend.jackdevries.com"
 }
