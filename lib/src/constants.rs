@@ -1,4 +1,4 @@
-const PROD_BASE_URL: &str = "https://bikeapi.jackdevries.com";
+const PROD_BASE_URL: &str = "https://rust-template-back.jackdevries.com";
 const DEV_BASE_URL: &str = "http://localhost:8000";
 
 /**
@@ -38,9 +38,9 @@ mod tests {
     #[test]
     fn backend_base_url() {
         if IS_PRODUCTION {
-            assert_eq!(BACKEND_BASE_URL, "https://bikeapi.jackdevries.com");
+            assert_eq!(BACKEND_BASE_URL, PROD_BASE_URL);
         } else {
-            assert_eq!(BACKEND_BASE_URL, "http://localhost:8000");
+            assert_eq!(BACKEND_BASE_URL, DEV_BASE_URL);
         }
     }
 }

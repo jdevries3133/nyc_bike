@@ -30,5 +30,5 @@ module "container-deployment" {
 
   app_name = "rust-template-web"
   container = "jdevries3133/rust_template_web:${data.external.git_describe.result.output}"
-  domain = "rust-template-web.jackdevries.com"
+  domain = "rust-template-front.jackdevries.com"
 }
