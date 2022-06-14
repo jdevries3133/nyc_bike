@@ -22,3 +22,12 @@ Take a look at the [getting started guide.](./docs/src/setup.md)
 | `lib`       | shared library between all rust projects |
 | `mobile`    | flutter project for iOS and Android apps |
 | `web_front` | web frontend with Yew and Tailwind CSS   |
+
+## Demo Deployment
+
+The web frontend, backend, and documentation site are all deployed, and can be
+viewed at the following URLs:
+
+- [frontend](https://rust-template-front.jackdevries.com)
+- [backend](https://rust-template-front.jackdevries.com)
+- [documentation site](https://rust-template-doc.jackdevries.com)
