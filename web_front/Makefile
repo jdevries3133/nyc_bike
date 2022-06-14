@@ -63,5 +63,4 @@ deploy: push-container
 
 .PHONY: check
 check:
-	IS_PRODUCTION=true cargo test
 	cargo test

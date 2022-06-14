@@ -22,6 +22,7 @@ deploy:
 check:
 	make --directory=./web_front check
 	make --directory=./backend check
+	cd lib && cargo test
 
 
 .PHONY: setup-ci
