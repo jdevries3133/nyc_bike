@@ -1,9 +1,9 @@
-# Mobile Apps
+# Mobile App
 
-A main component of this project is making mobile apps as a means of delivering
-most of the user experience. The app will be with people from the grocery store
-to the kitchen as they compete and take part in the gamified cooking
-experience.
+The idea of the mobile app is to use flutter, but to only implement UI with
+flutter, and to call rust through FFI or flutter_rust_bridge for any
+client-side business logic and data fetching. This (ideally) means the mobile
+apps can share logic from the web frontend as well.
 
 ## Tech Overview
 

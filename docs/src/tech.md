@@ -1,10 +1,8 @@
 # Tech Choices
 
-## All Around
-
 All infrastructure is going to Kubernetes via Docker and Terraform. The backend
 app container and database (PostgreSQL) will run in Kubernetes, the frontend
-static site will be served from Kubernetes
+static site will be served from Kubernetes.
 
 ## Web Frontend
 

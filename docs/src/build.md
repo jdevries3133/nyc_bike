@@ -1,8 +1,7 @@
 # Build System
 
-This boilerplate uses make to organize shell commands. In this use case, the
-make rules are simply small collections of shell commands rather than using
-make for low-level compilation tasks which is its more typical use case.
+Make is used as a build system. Each subproject at least has rules for
+`develop` and `deploy`.
 
 Since there are different CLI tools in different parts of this project, make is
 used to create a higher-level abstraction over these tools, which include:
@@ -25,10 +24,14 @@ Makefiles assume that you have installed these CLI tools.
 
 _\*this is only required for development and need not be installed in CI/CD_
 
+The CI/CD in `.github/workflows/ci_cd.yml` takes care of installing these
+things up front.
+
 ## Top-Level Makefile
 
 The top-level Makefile has rules to support testing, developing, and deploying
-the whole system together.
+the whole system together, which dispatches to subproject rules, either
+sequentially (`check`, `deploy`) or concurrently (`develop`).
 
 ### `make develop`
 
