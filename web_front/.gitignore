@@ -2,3 +2,6 @@
 /dist
 
 tailwind.css
+
+# trunk executable is pulled down from the web in CI environments
+trunk

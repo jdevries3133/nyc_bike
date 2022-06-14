@@ -1,14 +1,11 @@
-FROM ubuntu:latest as user
+FROM debian:buster-slim
 
-RUN useradd -u 10001 appuser
-
-FROM scratch
-
-COPY --from=user /etc/passwd /etc/passwd
+RUN adduser --disabled-password --no-create-home rocket
+USER rocket
 
 WORKDIR /app
-COPY ./Rocket.toml ./backend ./
 
-USER appuser
+COPY ./Rocket.toml .
+COPY ./backend .
 
 CMD ["./backend"]

@@ -22,6 +22,11 @@ initdb:
 	fi;
 
 
+.PHONY: setup-ci
+setup-ci:
+	terraform init -input=false
+
+
 .PHONY: develop
 develop: initdb
 	find src | entr -r cargo run
@@ -29,21 +34,28 @@ develop: initdb
 
 .PHONY: deploy
 deploy: push
-ifdef CI
-	terraform init -input=false
-endif
 	terraform apply -auto-approve
 
 
 .PHONY: pre-container-build
 pre-container-build:
-	cargo build --release --target x86_64-unknown-linux-musl
-	cp ../target/x86_64-unknown-linux-musl/release/backend .
+ifeq ($(shell arch), "x86_64")
+	cargo build --release
+	cp ../target/release/backend .
+else
+	cargo build --release --target x86_64-unknown-linux-gnu
+	cp ../target/x86_64-unknown-linux-gnu/release/backend .
+endif
 
 
 .PHONY: push
 push: pre-container-build
-	docker buildx build --pull --platform linux/x86_64 --push -t $(CONTAINER) .
+	docker buildx build --platform linux/x86_64 --push -t $(CONTAINER) .
+
+
+.PHONY: build
+build: pre-container-build
+	docker buildx build --platform linux/x86_64 --load -t $(CONTAINER) .
 
 
 .PHONY: check
