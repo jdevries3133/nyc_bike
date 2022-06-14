@@ -15,7 +15,7 @@ develop:
 deploy:
 	make --directory=./backend deploy
 	make --directory=./web_front deploy
-	make --directory=./docs deploy
+	make --directory=./doc deploy
 
 
 .PHONY: check

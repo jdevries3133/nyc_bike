@@ -18,7 +18,7 @@ Take a look at the [getting started guide.](./docs/src/setup.md)
 | Directory   | Contents                                 |
 | ----------- | ---------------------------------------- |
 | `backend`   | web backend with rocket and diesel ORM   |
-| `docs`      | mkdocs documentation site                |
+| `doc`       | mkdocs documentation site                |
 | `lib`       | shared library between all rust projects |
 | `mobile`    | flutter project for iOS and Android apps |
 | `web_front` | web frontend with Yew and Tailwind CSS   |
