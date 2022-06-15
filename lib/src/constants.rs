@@ -1,4 +1,4 @@
-const PROD_BASE_URL: &str = "https://rust-template-back.jackdevries.com";
+const PROD_BASE_URL: &str = "https://nyc-bike-back.jackdevries.com";
 const DEV_BASE_URL: &str = "http://localhost:8000";
 
 /**

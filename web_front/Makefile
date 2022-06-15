@@ -12,7 +12,7 @@ TAILWIND_PROD_FLAGS=--minify
 
 # frontend static site container (nginx-based)
 DOCKER_ACCOUNT=jdevries3133
-CONTAINER_NAME=rust_template_web
+CONTAINER_NAME=nyc_bike_web
 TAG?=$(shell git describe --tags)
 CONTAINER=$(DOCKER_ACCOUNT)/$(CONTAINER_NAME):$(TAG)
 

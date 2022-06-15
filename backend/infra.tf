@@ -2,7 +2,7 @@ terraform {
 
   backend "s3" {
     bucket = "my-sites-terraform-remote-state"
-    key    = "rust_template_backend"
+    key    = "nyc_bike_backend"
     region = "us-east-2"
   }
 
@@ -42,7 +42,7 @@ module "basic-deployment" {
   source  = "jdevries3133/basic-deployment/kubernetes"
   version = "0.2.0"
 
-  app_name  = "rust-template-backend"
-  container = "jdevries3133/rust_template_backend:${data.external.git_describe.result.output}"
-  domain    = "rust-template-back.jackdevries.com"
+  app_name  = "nyc-bike-backend"
+  container = "jdevries3133/nyc_bike_backend:${data.external.git_describe.result.output}"
+  domain    = "bike-app-back.jackdevries.com"
 }

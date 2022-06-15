@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 
 DOCKER_ACCOUNT=jdevries3133
-CONTAINER_NAME=rust_template_backend
+CONTAINER_NAME=nyc_bike_backend
 TAG?=$(shell git describe --tags)
 CONTAINER=$(DOCKER_ACCOUNT)/$(CONTAINER_NAME):$(TAG)
 
