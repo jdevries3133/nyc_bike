@@ -1,17 +1,4 @@
-# Rust App Template
-
-Template for a full stack rust app, including these features:
-
-- boilerplate for a rocket/diesel web backend, yew frontend, and flutter mobile
-  app (calling Rust code via FFI)
-- GitHub actions for CI/CD
-- documentation website, including starter documentation on the boilerplate
-  itself
-- portable infrastructure as code for Kubernetes implemented with Terraform
-
-## Getting Started
-
-Take a look at the [getting started guide.](./docs/src/setup.md)
+# NYC Bike
 
 ## Top-Level Tour
 
