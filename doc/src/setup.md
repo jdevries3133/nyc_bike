@@ -7,11 +7,17 @@ To get started with this boilerplate, follow these steps:
 Change domains of the frontend and backend in their respective `infra.tf`
 files.
 
-## Rename Docker Container & Account
+## Remove Template Naming
 
-Makefiles for the docs site, web front, and backend projects define the docker
-account name and container names at the very top. Change these to your docker
-account and the container names that make sense for your project.
+Domain names, container names, and terraform state keys all use "rust-template"
+or "rust_template" as a prefix. To find all the locations that need to be
+updated, run:
+
+```bash
+grep -rn "rust.template" .
+```
+
+This will yield a list of all the spots that need to be updated.
 
 ## git tag Required
 
