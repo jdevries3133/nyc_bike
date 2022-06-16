@@ -56,8 +56,3 @@ push: pre-container-build
 .PHONY: build
 build: pre-container-build
 	docker buildx build --platform linux/x86_64 --load -t $(CONTAINER) .
-
-
-.PHONY: check
-check:
-	cargo test

@@ -59,8 +59,3 @@ push-container: pre-container-build
 .PHONY: deploy
 deploy: push-container
 	terraform apply -auto-approve
-
-
-.PHONY: check
-check:
-	cargo test

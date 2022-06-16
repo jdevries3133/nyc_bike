@@ -20,9 +20,8 @@ deploy:
 
 .PHONY: check
 check:
-	make --directory=./web_front check
-	make --directory=./backend check
-	cd lib && cargo test
+	cargo test
+	cargo fmt --check
 
 
 .PHONY: setup-ci
