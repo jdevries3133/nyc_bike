@@ -5,9 +5,9 @@ const DEV_BASE_URL: &str = "http://localhost:8000";
  * Determined by whether the `IS_PRODUCTION` environment variable was set
  * during build time.
  */
-pub const IS_PRODUCTION: bool = match option_env!("IS_PRODUCTION")  {
+pub const IS_PRODUCTION: bool = match option_env!("IS_PRODUCTION") {
     Some(_) => true,
-    None => false
+    None => false,
 };
 
 /**
@@ -21,16 +21,15 @@ pub const BACKEND_BASE_URL: &str = {
     }
 };
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn is_production() {
-        let compile_time_var = match option_env!("IS_PRODUCTION")  {
+        let compile_time_var = match option_env!("IS_PRODUCTION") {
             Some(_) => true,
-            None => false
+            None => false,
         };
         assert_eq!(compile_time_var, IS_PRODUCTION)
     }
