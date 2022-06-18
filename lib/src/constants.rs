@@ -1,45 +1,43 @@
-const PROD_BASE_URL: &str = "https://nyc-bike-back.jackdevries.com";
-const DEV_BASE_URL: &str = "http://localhost:8000";
-
-/**
- * Determined by whether the `IS_PRODUCTION` environment variable was set
- * during build time.
+/*****************************************************************************
+ * generic constants
  */
+
 pub const IS_PRODUCTION: bool = match option_env!("IS_PRODUCTION") {
     Some(_) => true,
     None => false,
 };
+const PROTOCOL: &str = if IS_PRODUCTION { "https://" } else { "http://" };
 
-/**
- * For example, localhost:8000 in development
+/*****************************************************************************
+ * frontend domain and URLs
  */
-pub const BACKEND_BASE_URL: &str = {
-    if IS_PRODUCTION {
-        PROD_BASE_URL
-    } else {
-        DEV_BASE_URL
-    }
+
+const WEB_FRONT_PROD_DOMAIN: &str = "nyc-bike.jackdevries.com";
+const WEB_FRONT_DEV_DOMAIN: &str = "localhost:8080";
+
+pub const WEB_FRONT_ORIGIN: &str = if IS_PRODUCTION {
+    WEB_FRONT_PROD_DOMAIN
+} else {
+    WEB_FRONT_DEV_DOMAIN
 };
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub fn get_web_front_base_url() -> String {
+    format!("{}{}", PROTOCOL, WEB_FRONT_ORIGIN)
+}
 
-    #[test]
-    fn is_production() {
-        let compile_time_var = match option_env!("IS_PRODUCTION") {
-            Some(_) => true,
-            None => false,
-        };
-        assert_eq!(compile_time_var, IS_PRODUCTION)
-    }
+/*****************************************************************************
+ * backend domain and URLs
+ */
 
-    #[test]
-    fn backend_base_url() {
-        if IS_PRODUCTION {
-            assert_eq!(BACKEND_BASE_URL, PROD_BASE_URL);
-        } else {
-            assert_eq!(BACKEND_BASE_URL, DEV_BASE_URL);
-        }
-    }
+const BACKEND_PROD_DOMAIN: &str = "nyc-bike-back.jackdevries.com";
+const BACKEND_DEV_DOMAIN: &str = "localhost:8000";
+
+pub const BACKEND_ORIGIN: &str = if IS_PRODUCTION {
+    BACKEND_PROD_DOMAIN
+} else {
+    BACKEND_DEV_DOMAIN
+};
+
+pub fn get_backend_base_url() -> String {
+    format!("{}{}", PROTOCOL, BACKEND_ORIGIN)
 }

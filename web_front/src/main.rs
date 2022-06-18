@@ -1,6 +1,46 @@
 use lib::constants;
+use reqwasm::http::Request;
+use wasm_bindgen_futures;
 use wasm_logger;
 use yew::prelude::*;
+
+struct FunctionComponentState {
+    value: String,
+}
+
+#[function_component(FunctionComponent)]
+fn function_component() -> Html {
+    let data = use_state(|| None);
+    {
+        let data = data.clone();
+        use_effect_with_deps(
+            move |_| {
+                wasm_bindgen_futures::spawn_local(async move {
+                    let fetched_data = Request::get(&constants::get_backend_base_url())
+                        .send()
+                        .await
+                        .unwrap()
+                        .text()
+                        .await
+                        .unwrap();
+                    data.set(Some(FunctionComponentState {
+                        value: format!("{}", fetched_data),
+                    }));
+                });
+                || ()
+            },
+            (),
+        );
+    }
+    match &(*data) {
+        Some(s) => html! {
+            <p>{ format!("{}", s.value) }</p>
+        },
+        None => html! {
+            <p>{ "loading... " }</p>
+        },
+    }
+}
 
 enum Msg {
     AddOne,
@@ -8,13 +48,6 @@ enum Msg {
 
 struct Model {
     value: i64,
-}
-
-#[function_component(FunctionComponent)]
-fn function_component() -> Html {
-    html! {
-        <p>{ "This is a functional component" }</p>
-    }
 }
 
 impl Component for Model {
@@ -47,7 +80,6 @@ impl Component for Model {
                 >{ "+1" }</button>
                 <p class="text-xl serif">{ "Current Count: " }{ self.value }</p>
                 <FunctionComponent />
-                <p>{ "base url: " }{ constants::BACKEND_BASE_URL }</p>
             </div>
         }
     }
