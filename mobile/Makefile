@@ -30,7 +30,7 @@ ping-flutter:
 	while true; \
 	do \
 		if [ -f /tmp/flutter.pid ]; then \
-			find lib | entr -d -p kill -USR1 $(shell cat /tmp/flutter.pid); \
+			find . | grep "\.\(rs\|dart\)$$" | entr -d -p kill -USR1 $(shell cat /tmp/flutter.pid); \
 		fi; \
 		sleep 1; \
 	done

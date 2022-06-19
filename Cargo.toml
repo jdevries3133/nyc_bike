@@ -3,5 +3,6 @@
 members = [
     "backend",
     "lib",
-    "web_front"
+    "web_front",
+    "mobile/native"
 ]

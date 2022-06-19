@@ -1,4 +1,3 @@
-# Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
 project(mobile LANGUAGES CXX)
 
@@ -10,7 +9,9 @@ set(BINARY_NAME "mobile")
 # versions of CMake.
 cmake_policy(SET CMP0063 NEW)
 
-# Define build configuration option.
+set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
+
+# Configure build options.
 get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if(IS_MULTICONFIG)
   set(CMAKE_CONFIGURATION_TYPES "Debug;Profile;Release"
@@ -23,7 +24,7 @@ else()
       "Debug" "Profile" "Release")
   endif()
 endif()
-# Define settings for the Profile build mode.
+
 set(CMAKE_EXE_LINKER_FLAGS_PROFILE "${CMAKE_EXE_LINKER_FLAGS_RELEASE}")
 set(CMAKE_SHARED_LINKER_FLAGS_PROFILE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE}")
 set(CMAKE_C_FLAGS_PROFILE "${CMAKE_C_FLAGS_RELEASE}")
@@ -47,6 +48,8 @@ endfunction()
 
 # Flutter library and tool build rules.
 set(FLUTTER_MANAGED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/flutter")
+
+# Flutter library and tool build rules.
 add_subdirectory(${FLUTTER_MANAGED_DIR})
 
 # Application build; see runner/CMakeLists.txt.
@@ -56,6 +59,7 @@ add_subdirectory("runner")
 # them to the application.
 include(flutter/generated_plugins.cmake)
 
+include(./rust.cmake)
 
 # === Installation ===
 # Support files are copied into place next to the executable, so that it can
