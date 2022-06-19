@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 
 void main() {
   runApp(const MyApp());
@@ -48,7 +50,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late Future<String> futureString;
   int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    futureString = getText();
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -59,6 +68,15 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  Future<String> getText() async {
+    final response = await http.get(Uri.parse('http://127.0.0.1:8000'));
+
+    if (response.statusCode == 200) {
+        return response.body;
+    }
+    throw Exception("error occured fetching text");
   }
 
   @override
@@ -102,6 +120,17 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            FutureBuilder<String>(
+              future: futureString,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data as String);
+                } else if (snapshot.hasError) {
+                  return SelectableText('${snapshot.error}');
+                }
+                return const CircularProgressIndicator();
+              }
+            )
           ],
         ),
       ),
