@@ -53,12 +53,14 @@ class _MyHomePageState extends State<MyHomePage> {
   // in the initState method.
   late Future<Platform> platform;
   late Future<bool> isRelease;
+  late Future<String> backendUrl;
 
   @override
   void initState() {
     super.initState();
     platform = api.platform();
     isRelease = api.rustReleaseMode();
+    backendUrl = api.getBackendBaseUrl();
   }
 
   @override
@@ -139,7 +141,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Unknown OS';
                 return Text('$text ($release)', style: style);
               },
-            )
+            ),
+            FutureBuilder(
+                future: backendUrl,
+                builder: (context, snap) {
+                  if (snap.hasData) {
+                    return Text('backend: ${snap.data}');
+                  }
+                  if (snap.hasError) {
+                    return Text('error: ${snap.error}');
+                  }
+                  return const Text('backend loading...');
+                })
           ],
         ),
       ),

@@ -17,6 +17,15 @@ develop:
 		"sh -c \"sleep $(FLUTTER_STARTUP_DELAY) && make ping-flutter\""
 
 
+.PHONY: reload
+reload:
+	# trigger flutter_rust_bridge codegen
+	just --working-directory gen
+	# send USR1 signal to flutter to trigger reload
+	kill -USR1 $(shell cat /tmp/flutter.pid)
+
+
+
 # flutter doesn't live reload on file change. The default CLI waits for a `r`
 # to be sent to STDIN, but that doesn't work nicely here since we're running
 # many layers of concurrentl processes by the top level Makefile, and we don't
@@ -30,7 +39,7 @@ ping-flutter:
 	while true; \
 	do \
 		if [ -f /tmp/flutter.pid ]; then \
-			find . | grep "\.\(rs\|dart\)$$" | entr -d -p kill -USR1 $(shell cat /tmp/flutter.pid); \
+			find . | grep "\.\(rs\|dart\)$$" | entr -d -p make reload; \
 		fi; \
 		sleep 1; \
 	done

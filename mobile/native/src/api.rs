@@ -1,3 +1,5 @@
+use flutter_rust_bridge::frb;
+
 // This is the entry point of your Rust library.
 // When adding new code to your project, note that only items used
 // here will be transformed to their Dart equivalents.
@@ -56,4 +58,17 @@ pub fn platform() -> Platform {
 // and they are automatically converted to camelCase on the Dart side.
 pub fn rust_release_mode() -> bool {
     cfg!(not(debug_assertions))
+}
+
+// shared library shadow
+pub use libnybike::constants::{get_backend_base_url, get_web_front_base_url};
+
+#[frb(mirror(get_web_front_base_url))]
+pub fn _get_web_front_base_url() -> String {
+    get_web_front_base_url()
+}
+
+#[frb(mirror(get_backend_base_url))]
+pub fn _get_backend_base_url() -> String {
+    get_backend_base_url()
 }
