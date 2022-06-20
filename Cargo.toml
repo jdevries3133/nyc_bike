@@ -2,7 +2,7 @@
 
 members = [
     "backend",
-    "lib",
+    "libnybike",
     "web_front",
     "mobile/native"
 ]
