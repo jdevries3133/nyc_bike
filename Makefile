@@ -26,5 +26,9 @@ check:
 
 .PHONY: setup-ci
 setup-ci:
+ifdef CI
 	make --directory=./backend setup-ci
 	make --directory=./web_front setup-ci
+else
+	@echo "setup-ci is a no-op because this is not a CI environment"
+endif

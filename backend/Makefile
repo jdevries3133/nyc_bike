@@ -24,7 +24,11 @@ initdb:
 
 .PHONY: setup-ci
 setup-ci:
+ifdef CI
 	terraform init -input=false
+else
+	@echo "setup-ci is a no-op because this is not a CI environment"
+endif
 
 
 .PHONY: develop

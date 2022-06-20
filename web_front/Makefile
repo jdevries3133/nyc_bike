@@ -20,10 +20,14 @@ CONTAINER=$(DOCKER_ACCOUNT)/$(CONTAINER_NAME):$(TAG)
 
 .PHONY: setup
 setup-ci:
+ifdef CI
 	terraform init -input=false
 	# download a trunk binary to the current working directory
 	wget -qO- https://github.com/thedodd/trunk/releases/download/v0.15.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
 	rustup target add wasm32-unknown-unknown
+else
+	@echo "setup-ci is a no-op because this is not a CI environment"
+endif
 
 
 .PHONY: develop
