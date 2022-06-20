@@ -2,7 +2,7 @@ use rocket::fairing::{Fairing, Info, Kind};
 use rocket::http::Header;
 use rocket::{Request, Response};
 
-use libnybike::constants;
+use lib::constants;
 
 pub struct CORS;
 

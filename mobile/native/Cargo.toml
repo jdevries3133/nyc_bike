@@ -9,6 +9,6 @@ edition = "2021"
 crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
-libnybike = { path = "../../libnybike" }
+lib = { path = "../../lib" }
 anyhow = "1"
 flutter_rust_bridge = "1"

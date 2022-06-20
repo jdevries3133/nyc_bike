@@ -61,7 +61,7 @@ pub fn rust_release_mode() -> bool {
 }
 
 // shared library shadow
-pub use libnybike::constants::{get_backend_base_url, get_web_front_base_url};
+pub use lib::constants::{get_backend_base_url, get_web_front_base_url};
 
 #[frb(mirror(get_web_front_base_url))]
 pub fn _get_web_front_base_url() -> String {
