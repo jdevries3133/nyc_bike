@@ -41,6 +41,30 @@ pub extern "C" fn wire_rust_release_mode(port_: i64) {
     )
 }
 
+#[no_mangle]
+pub extern "C" fn wire__get_web_front_base_url(port_: i64) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "_get_web_front_base_url",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || move |task_callback| Ok(_get_web_front_base_url()),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn wire__get_backend_base_url(port_: i64) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "_get_backend_base_url",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || move |task_callback| Ok(_get_backend_base_url()),
+    )
+}
+
 // Section: wire structs
 
 // Section: wrapper structs
